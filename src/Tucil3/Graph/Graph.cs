@@ -17,6 +17,13 @@ namespace Tucil3.Graph
             //adjMatrix = new Dictionary<string, Dictionary<string, double>>();
         }
 
+        public void printVertex()
+        {
+            foreach (Vertex simpul in Vertices)
+                Console.WriteLine(simpul.Name);
+            }
+        }
+
         public void AddVertex(string v, double x, double y)
         {
             Vertices.Add(new Vertex(v, x, y));

@@ -14,6 +14,12 @@ namespace Tucil3
         [STAThread]
         static void Main()
         {
+            //Console.WriteLine("test");
+            //Graph.Graph a = new Graph.Graph();
+            //ReadFile.readFile("input.txt", ref a);
+            //a.printVertex();
+            //Console.ReadLine();
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
