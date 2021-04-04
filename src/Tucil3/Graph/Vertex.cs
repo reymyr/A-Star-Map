@@ -33,12 +33,12 @@ namespace Tucil3.Graph
         }
 
         // Constructor
-        public Vertex(string name, double x, double y)
+        public Vertex(string name, double lat, double lon)
         {
             this.Name = name;
             this.Edges = new List<Edge>();
-            this.Latitude = x;
-            this.Longitude = y;
+            this.Latitude = lat;
+            this.Longitude = lon;
         }
     }
 }

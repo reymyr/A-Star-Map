@@ -34,7 +34,7 @@ namespace Tucil3.Graph
             for (; i <= nVertex; i++)
             {
                 pairVertex = filePerLine[i].Split(' '); //baca vertex
-                this.AddVertex(pairVertex[2], double.Parse(pairVertex[1], CultureInfo.InvariantCulture), double.Parse(pairVertex[0], CultureInfo.InvariantCulture)); //karena urutan di file : lintang bujur nama
+                this.AddVertex(pairVertex[2], double.Parse(pairVertex[0], CultureInfo.InvariantCulture), double.Parse(pairVertex[1], CultureInfo.InvariantCulture)); //karena urutan di file : lintang bujur nama
                 kamusVertex.Add(i - 1, pairVertex[2]); //nambahin nama vertex ke kamus
             }
 
