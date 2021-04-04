@@ -174,13 +174,34 @@ namespace Tucil3.Graph
             }
         }
 
+        public double degreeToRadian (double degree) {
+            return degree*Math.PI/180;
+        }
+
+        public double haversine(double curBujur, double goalBujur, double curLintang, double goalLintang)
+        { //semua parameter belum diubah ke radian
+            curBujur = degreeToRadian(curBujur);
+            goalBujur = degreeToRadian(goalBujur);
+            curLintang = degreeToRadian(curLintang);
+            goalLintang = degreeToRadian(goalLintang);
+
+            double diffBujur = goalBujur - curBujur;
+            double diffLintang = goalLintang - curLintang;
+            double haversineFormula = Math.Pow(Math.Sin(diffLintang/2),2) + Math.Cos(curLintang) * Math.Cos(goalLintang) * Math.Pow(Math.Sin(diffBujur/2),2);
+            double distancePerKilometer = 2 * Math.Asin(Math.Sqrt(haversineFormula));
+            return distancePerKilometer * 6378137; //6378137 itu jari jari bumi (satuan meter)
+        }
+
         private double CalcHeuristic(string v1, string goal)
         {
-            Vertex a = Vertices.Find(v => v.Name == v1);
-            Vertex b = Vertices.Find(v => v.Name == goal);
+            Vertex curVertex = Vertices.Find(v => v.Name == v1);
+            Vertex goalVertex = Vertices.Find(v => v.Name == goal);
 
-            //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
-            return a.Test;
+            return haversine(curVertex.X, goalVertex.X, curVertex.Y, goalVertex.Y);
+
+            // //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
+            // return a.Test;
+
         }
 
         // Mengembalikan graf dalam bentuk graph MSAGL untuk divisualisasikan
