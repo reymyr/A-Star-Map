@@ -20,19 +20,13 @@ namespace Tucil3.Graph
             set;
         }
 
-        public double X
+        public double Latitude
         {
             get;
             set;
         }
 
-        public double Y
-        {
-            get;
-            set;
-        }
-
-        public double Test
+        public double Longitude
         {
             get;
             set;
@@ -43,14 +37,8 @@ namespace Tucil3.Graph
         {
             this.Name = name;
             this.Edges = new List<Edge>();
-            this.X = x;
-            this.Y = y;
-        }
-        public Vertex(string name, double a)
-        {
-            this.Name = name;
-            this.Edges = new List<Edge>();
-            this.Test = a;
+            this.Latitude = x;
+            this.Longitude = y;
         }
     }
 }

@@ -6,12 +6,6 @@ namespace Tucil3.Graph
 {
     class Edge
     {
-        public string FromVertex
-        {
-            get;
-            set;
-        }
-
         public string ToVertex
         {
             get;

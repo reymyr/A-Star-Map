@@ -63,11 +63,6 @@ namespace Tucil3.Graph
             Vertices.Add(new Vertex(v, x, y));
         }
 
-        public void AddVertex(string v, double a)
-        {
-            Vertices.Add(new Vertex(v, a));
-        }
-
         public void RemoveVertex(string v)
         {
             Vertices.RemoveAll(vertex => vertex.Name == v);
@@ -178,7 +173,7 @@ namespace Tucil3.Graph
             return degree*Math.PI/180;
         }
 
-        public double haversine(double curBujur, double goalBujur, double curLintang, double goalLintang)
+        public double haversine(double curLintang, double goalLintang, double curBujur, double goalBujur)
         { //semua parameter belum diubah ke radian
             curBujur = degreeToRadian(curBujur);
             goalBujur = degreeToRadian(goalBujur);
@@ -197,7 +192,7 @@ namespace Tucil3.Graph
             Vertex curVertex = Vertices.Find(v => v.Name == v1);
             Vertex goalVertex = Vertices.Find(v => v.Name == goal);
 
-            return haversine(curVertex.X, goalVertex.X, curVertex.Y, goalVertex.Y);
+            return haversine(curVertex.Latitude, goalVertex.Latitude, curVertex.Longitude, goalVertex.Longitude);
 
             // //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
             // return a.Test;
