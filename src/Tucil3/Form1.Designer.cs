@@ -29,23 +29,50 @@ namespace Tucil3
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.resultBox = new System.Windows.Forms.RichTextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.graphVisualizer = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // resultBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(195, 177);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(413, 183);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.resultBox.Location = new System.Drawing.Point(656, 74);
+            this.resultBox.Name = "resultBox";
+            this.resultBox.Size = new System.Drawing.Size(413, 183);
+            this.resultBox.TabIndex = 0;
+            this.resultBox.Text = "";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(656, 32);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowse.TabIndex = 2;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // graphVisualizer
+            // 
+            this.graphVisualizer.Location = new System.Drawing.Point(12, 32);
+            this.graphVisualizer.Name = "graphVisualizer";
+            this.graphVisualizer.Size = new System.Drawing.Size(606, 380);
+            this.graphVisualizer.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 578);
-            this.Controls.Add(this.richTextBox1);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1087, 433);
+            this.Controls.Add(this.graphVisualizer);
+            this.Controls.Add(this.btnBrowse);
+            this.Controls.Add(this.resultBox);
             this.Name = "Form1";
             this.Text = "Map";
             this.ResumeLayout(false);
@@ -54,7 +81,10 @@ namespace Tucil3
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox resultBox;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Panel graphVisualizer;
     }
 }
 

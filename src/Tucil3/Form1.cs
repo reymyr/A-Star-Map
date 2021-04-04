@@ -13,12 +13,12 @@ namespace Tucil3
 {
     public partial class Form1 : Form
     {
+        private Graph.Graph graph;
         public Form1()
         {
             InitializeComponent();
-            Graph.Graph a = new Graph.Graph();
+            Graph.Graph a = new Graph.Graph("input.txt");
 
-            ReadFile.readFile("input.txt", ref a);
             //a.AddVertex("A", 366);
             //a.AddVertex("B", 0);
             //a.AddVertex("C", 160);
@@ -63,8 +63,43 @@ namespace Tucil3
             //a.AddEdge("R", "S", 80);
             //a.AddEdge("U", "V", 142);
 
-            richTextBox1.Text = a.AStar("Gerbang_Belakang_ITB", "RS_Borromeus");
+            resultBox.Text = a.AStar("Gerbang_Belakang_ITB", "RS_Borromeus");
         }
 
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) // Jika pengguna memilih file, asumsi format file masukan benar
+            {
+                //prevCombos.Clear();
+                resultBox.Text = "";
+                //labelFilename.Text = openFileDialog1.SafeFileName;
+
+                // Bentuk graf dari file
+                graph = new Graph.Graph(openFileDialog1.FileName);
+
+                // Membuat MSAGL viewer
+                Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+
+                // Mengambil bentuk graf MSAGL dari graf masukan 
+                Microsoft.Msagl.Drawing.Graph msaglgraph = graph.getMSAGLGraph(openFileDialog1.SafeFileName);
+
+                // Bind the graph to the viewer 
+                viewer.Graph = msaglgraph;
+
+                // Add the graph to visualizer panel
+                viewer.Dock = DockStyle.Fill;
+                graphVisualizer.Controls.Clear();
+                graphVisualizer.Controls.Add(viewer);
+
+                // Isi pilihan akun dengan semua simpul graf
+                //comboBoxAccount.Items.Clear();
+                //comboBoxFriend.Items.Clear();
+                //foreach (Vertex v in graph.AdjacencyList)
+                //{
+                //    comboBoxAccount.Items.Add(v.Name);
+                //    comboBoxFriend.Items.Add(v.Name);
+                //}
+            }
+        }
     }
 }

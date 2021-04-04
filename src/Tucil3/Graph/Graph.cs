@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.IO;
+using System.Globalization;
 
 namespace Tucil3.Graph
 {
@@ -17,11 +19,43 @@ namespace Tucil3.Graph
             //adjMatrix = new Dictionary<string, Dictionary<string, double>>();
         }
 
+        public Graph(string filename)
+        {
+            Vertices = new List<Vertex>();
+            string[] filePerLine = File.ReadAllLines(filename); //baca file per line
+                                                                //hitung jumlah vertex
+            int nVertex = int.Parse(filePerLine[0]);
+            //container isi file per line
+            string[] pairVertex;
+            string[] pairEdge;
+            Dictionary<int, string> kamusVertex = new Dictionary<int, string>(); //buat nyari nama vertex pas masukin edge adj matrix
+
+            int i = 1;
+            for (; i <= nVertex; i++)
+            {
+                pairVertex = filePerLine[i].Split(' '); //baca vertex
+                this.AddVertex(pairVertex[2], double.Parse(pairVertex[1], CultureInfo.InvariantCulture), double.Parse(pairVertex[0], CultureInfo.InvariantCulture)); //karena urutan di file : lintang bujur nama
+                kamusVertex.Add(i - 1, pairVertex[2]); //nambahin nama vertex ke kamus
+            }
+
+            for (int j = i; j < filePerLine.Length; j++)
+            {
+                pairEdge = filePerLine[j].Split(' '); //baca adj matrix
+                for (int k = 0; k <= j-i; k++)
+                {
+                    if (double.Parse(pairEdge[k]) > 0)
+                    {
+                        this.AddEdge(kamusVertex[j-i], kamusVertex[k], double.Parse(pairEdge[k], CultureInfo.InvariantCulture)); //intinya ini masukin edge berasal dari kamus nama    
+                    }
+                }
+
+            }
+        }
+
         public void printVertex()
         {
             foreach (Vertex simpul in Vertices)
                 Console.WriteLine(simpul.Name);
-            }
         }
 
         public void AddVertex(string v, double x, double y)
@@ -147,6 +181,29 @@ namespace Tucil3.Graph
 
             //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
             return a.Test;
+        }
+
+        // Mengembalikan graf dalam bentuk graph MSAGL untuk divisualisasikan
+        public Microsoft.Msagl.Drawing.Graph getMSAGLGraph(string name)
+        {
+            Microsoft.Msagl.Drawing.Graph g = new Microsoft.Msagl.Drawing.Graph(name);
+            g.Directed = false;
+            Vertices.ForEach(v => g.AddNode(v.Name).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle);
+
+            foreach (Vertex v in Vertices)
+            {
+                foreach (Edge e in v.Edges)
+                {
+                    int a = v.Name.CompareTo(e.ToVertex);
+                    if (v.Name.CompareTo(e.ToVertex) < 0)
+                    {
+                        Microsoft.Msagl.Drawing.Edge edge = g.AddEdge(v.Name, e.Weight.ToString(), e.ToVertex);
+                        edge.Attr.ArrowheadAtTarget = Microsoft.Msagl.Drawing.ArrowStyle.None;
+                        edge.Attr.Id = v.Name + e.ToVertex;
+                    }
+                }
+            }
+            return g;
         }
     }
 }
