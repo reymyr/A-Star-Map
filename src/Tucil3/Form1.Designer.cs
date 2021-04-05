@@ -33,19 +33,26 @@ namespace Tucil3
             this.btnBrowse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.graphVisualizer = new System.Windows.Forms.Panel();
+            this.gmap = new GMap.NET.WindowsForms.GMapControl();
+            this.startComboBox = new System.Windows.Forms.ComboBox();
+            this.goalComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.labelFilename = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // resultBox
             // 
-            this.resultBox.Location = new System.Drawing.Point(656, 74);
+            this.resultBox.Location = new System.Drawing.Point(720, 247);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(413, 183);
+            this.resultBox.Size = new System.Drawing.Size(447, 183);
             this.resultBox.TabIndex = 0;
             this.resultBox.Text = "";
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(656, 32);
+            this.btnBrowse.Location = new System.Drawing.Point(720, 80);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 2;
@@ -59,23 +66,113 @@ namespace Tucil3
             // 
             // graphVisualizer
             // 
-            this.graphVisualizer.Location = new System.Drawing.Point(12, 32);
+            this.graphVisualizer.Location = new System.Drawing.Point(12, 505);
             this.graphVisualizer.Name = "graphVisualizer";
-            this.graphVisualizer.Size = new System.Drawing.Size(606, 380);
+            this.graphVisualizer.Size = new System.Drawing.Size(649, 380);
             this.graphVisualizer.TabIndex = 3;
+            // 
+            // gmap
+            // 
+            this.gmap.Bearing = 0F;
+            this.gmap.CanDragMap = true;
+            this.gmap.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gmap.GrayScaleMode = false;
+            this.gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gmap.LevelsKeepInMemory = 5;
+            this.gmap.Location = new System.Drawing.Point(12, 32);
+            this.gmap.MarkersEnabled = true;
+            this.gmap.MaxZoom = 18;
+            this.gmap.MinZoom = 2;
+            this.gmap.MouseWheelZoomEnabled = true;
+            this.gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gmap.Name = "gmap";
+            this.gmap.NegativeMode = false;
+            this.gmap.PolygonsEnabled = true;
+            this.gmap.RetryLoadTile = 0;
+            this.gmap.RoutesEnabled = true;
+            this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gmap.ShowTileGridLines = false;
+            this.gmap.Size = new System.Drawing.Size(649, 448);
+            this.gmap.TabIndex = 4;
+            this.gmap.Zoom = 16D;
+            this.gmap.Load += new System.EventHandler(this.gmap_Load);
+            // 
+            // startComboBox
+            // 
+            this.startComboBox.FormattingEnabled = true;
+            this.startComboBox.Location = new System.Drawing.Point(812, 152);
+            this.startComboBox.Name = "startComboBox";
+            this.startComboBox.Size = new System.Drawing.Size(192, 23);
+            this.startComboBox.TabIndex = 5;
+            // 
+            // goalComboBox
+            // 
+            this.goalComboBox.FormattingEnabled = true;
+            this.goalComboBox.Location = new System.Drawing.Point(812, 201);
+            this.goalComboBox.Name = "goalComboBox";
+            this.goalComboBox.Size = new System.Drawing.Size(192, 23);
+            this.goalComboBox.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(711, 156);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 19);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Start Node";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(712, 205);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 19);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Goal Node";
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(1054, 201);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
+            this.btnSubmit.TabIndex = 9;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // labelFilename
+            // 
+            this.labelFilename.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFilename.Location = new System.Drawing.Point(812, 80);
+            this.labelFilename.Name = "labelFilename";
+            this.labelFilename.Size = new System.Drawing.Size(317, 23);
+            this.labelFilename.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1087, 433);
+            this.ClientSize = new System.Drawing.Size(1211, 921);
+            this.Controls.Add(this.labelFilename);
+            this.Controls.Add(this.btnSubmit);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.goalComboBox);
+            this.Controls.Add(this.startComboBox);
+            this.Controls.Add(this.gmap);
             this.Controls.Add(this.graphVisualizer);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.resultBox);
             this.Name = "Form1";
-            this.Text = "Map";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Map A*";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -85,6 +182,13 @@ namespace Tucil3
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel graphVisualizer;
+        private GMap.NET.WindowsForms.GMapControl gmap;
+        private System.Windows.Forms.ComboBox startComboBox;
+        private System.Windows.Forms.ComboBox goalComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Label labelFilename;
     }
 }
 

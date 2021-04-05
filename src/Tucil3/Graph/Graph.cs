@@ -9,7 +9,7 @@ namespace Tucil3.Graph
 {
     class Graph
     {
-        private List<Vertex> Vertices;
+        public List<Vertex> Vertices;
 
         //private Dictionary<string, Dictionary<string, double>> adjMatrix;
 
@@ -194,7 +194,7 @@ namespace Tucil3.Graph
 
             return haversine(curVertex.Latitude, goalVertex.Latitude, curVertex.Longitude, goalVertex.Longitude);
 
-            // //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
+            //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
             // return a.Test;
 
         }

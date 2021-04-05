@@ -20,12 +20,14 @@ namespace Tucil3.Graph
             set;
         }
 
+        // Koordinat latitude
         public double Latitude
         {
             get;
             set;
         }
 
+        // Koordinat longitude
         public double Longitude
         {
             get;
