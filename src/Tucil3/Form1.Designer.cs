@@ -52,7 +52,7 @@ namespace Tucil3
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(720, 80);
+            this.btnBrowse.Location = new System.Drawing.Point(719, 84);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 2;
@@ -101,7 +101,7 @@ namespace Tucil3
             // startComboBox
             // 
             this.startComboBox.FormattingEnabled = true;
-            this.startComboBox.Location = new System.Drawing.Point(812, 152);
+            this.startComboBox.Location = new System.Drawing.Point(834, 152);
             this.startComboBox.Name = "startComboBox";
             this.startComboBox.Size = new System.Drawing.Size(192, 23);
             this.startComboBox.TabIndex = 5;
@@ -109,7 +109,7 @@ namespace Tucil3
             // goalComboBox
             // 
             this.goalComboBox.FormattingEnabled = true;
-            this.goalComboBox.Location = new System.Drawing.Point(812, 201);
+            this.goalComboBox.Location = new System.Drawing.Point(834, 201);
             this.goalComboBox.Name = "goalComboBox";
             this.goalComboBox.Size = new System.Drawing.Size(192, 23);
             this.goalComboBox.TabIndex = 6;
@@ -117,22 +117,23 @@ namespace Tucil3
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(711, 156);
+            this.label1.Font = new System.Drawing.Font("Lucida Sans Unicode", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(719, 152);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 19);
+            this.label1.Size = new System.Drawing.Size(93, 18);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Start Node";
+            this.label1.Text = "Lokasi Awal";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(712, 205);
+            this.label2.Font = new System.Drawing.Font("Lucida Sans Unicode", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(719, 201);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 19);
+            this.label2.Size = new System.Drawing.Size(109, 18);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Goal Node";
+            this.label2.Text = "Lokasi Tujuan";
             // 
             // btnSubmit
             // 
@@ -146,8 +147,8 @@ namespace Tucil3
             // 
             // labelFilename
             // 
-            this.labelFilename.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelFilename.Location = new System.Drawing.Point(812, 80);
+            this.labelFilename.Font = new System.Drawing.Font("Segoe MDL2 Assets", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.labelFilename.Location = new System.Drawing.Point(812, 84);
             this.labelFilename.Name = "labelFilename";
             this.labelFilename.Size = new System.Drawing.Size(317, 23);
             this.labelFilename.TabIndex = 10;
@@ -157,7 +158,7 @@ namespace Tucil3
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1211, 921);
+            this.ClientSize = new System.Drawing.Size(1211, 749);
             this.Controls.Add(this.labelFilename);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label2);

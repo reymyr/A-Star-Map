@@ -141,8 +141,17 @@ namespace Tucil3.Graph
                     }
                 }
             }
-
-            resultString += cost[dest].ToString();
+            resultString += "\n";
+            resultString += "Jarak yang ditempuh: ";
+            if (cost[dest] >= 1000)
+            {
+                double km = cost[dest] / 1000;
+                resultString += km.ToString() + " kilometer";
+            }
+            else
+            {
+                resultString += cost[dest].ToString() + " meter";
+            }
 
             return new Tuple<List<string>, string>(path, resultString);
         }

@@ -84,7 +84,7 @@ namespace Tucil3
                             points.Add(curPoint);
                             points.Add(new GMap.NET.PointLatLng(graph.Vertices.Find(v => v.Name == edge.ToVertex).Latitude, graph.Vertices.Find(v => v.Name == edge.ToVertex).Longitude));
                             GMapPolygon line = new GMapPolygon(points, v.Name + edge.ToVertex);
-                            line.Stroke = new Pen(Color.Blue, 3);
+                            line.Stroke = new Pen(Color.Blue, 1);
                             lines.Polygons.Add(line);
                         }
                     }
@@ -154,6 +154,11 @@ namespace Tucil3
             {
                 resultBox.Text = "Please select the nodes";
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
