@@ -82,7 +82,7 @@ namespace Tucil3.Graph
             Vertices.Find(v => v.Name == v2).Edges.RemoveAll(edge => edge.ToVertex == v1);
         }
 
-        public string AStar(string source, string dest)
+        public Tuple<List<string>, string> AStar(string source, string dest)
         {
             Dictionary<string, double> cost = new Dictionary<string, double>();
             Dictionary<string, string> prev = new Dictionary<string, string>();
@@ -144,7 +144,7 @@ namespace Tucil3.Graph
 
             resultString += cost[dest].ToString();
 
-            return resultString;
+            return new Tuple<List<string>, string>(path, resultString);
         }
 
         public List<string> GetPath(string source, string dest, Dictionary<string, string> prev)
@@ -193,10 +193,6 @@ namespace Tucil3.Graph
             Vertex goalVertex = Vertices.Find(v => v.Name == goal);
 
             return haversine(curVertex.Latitude, goalVertex.Latitude, curVertex.Longitude, goalVertex.Longitude);
-
-            //return Math.Sqrt(Math.Pow((b.X - a.X), 2) + Math.Pow((b.Y - a.Y), 2));
-            // return a.Test;
-
         }
 
         // Mengembalikan graf dalam bentuk graph MSAGL untuk divisualisasikan
