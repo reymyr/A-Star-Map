@@ -40,19 +40,23 @@ namespace Tucil3
             this.label2 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.labelFilename = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // resultBox
             // 
-            this.resultBox.Location = new System.Drawing.Point(720, 247);
+            this.resultBox.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.resultBox.Location = new System.Drawing.Point(708, 195);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(447, 183);
+            this.resultBox.ReadOnly = true;
+            this.resultBox.Size = new System.Drawing.Size(447, 285);
             this.resultBox.TabIndex = 0;
             this.resultBox.Text = "";
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(719, 84);
+            this.btnBrowse.Location = new System.Drawing.Point(707, 32);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 2;
@@ -96,20 +100,24 @@ namespace Tucil3
             this.gmap.Size = new System.Drawing.Size(649, 448);
             this.gmap.TabIndex = 4;
             this.gmap.Zoom = 16D;
+            this.gmap.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gmap_OnMarkerClick);
             this.gmap.Load += new System.EventHandler(this.gmap_Load);
+            this.gmap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gmap_MouseClick);
             // 
             // startComboBox
             // 
+            this.startComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startComboBox.FormattingEnabled = true;
-            this.startComboBox.Location = new System.Drawing.Point(834, 152);
+            this.startComboBox.Location = new System.Drawing.Point(822, 115);
             this.startComboBox.Name = "startComboBox";
             this.startComboBox.Size = new System.Drawing.Size(192, 23);
             this.startComboBox.TabIndex = 5;
             // 
             // goalComboBox
             // 
+            this.goalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.goalComboBox.FormattingEnabled = true;
-            this.goalComboBox.Location = new System.Drawing.Point(834, 201);
+            this.goalComboBox.Location = new System.Drawing.Point(822, 149);
             this.goalComboBox.Name = "goalComboBox";
             this.goalComboBox.Size = new System.Drawing.Size(192, 23);
             this.goalComboBox.TabIndex = 6;
@@ -118,18 +126,17 @@ namespace Tucil3
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lucida Sans Unicode", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(719, 152);
+            this.label1.Location = new System.Drawing.Point(707, 115);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 18);
             this.label1.TabIndex = 7;
             this.label1.Text = "Lokasi Awal";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Lucida Sans Unicode", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(719, 201);
+            this.label2.Location = new System.Drawing.Point(707, 149);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 18);
             this.label2.TabIndex = 8;
@@ -137,7 +144,7 @@ namespace Tucil3
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(1054, 201);
+            this.btnSubmit.Location = new System.Drawing.Point(1042, 149);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 9;
@@ -148,17 +155,39 @@ namespace Tucil3
             // labelFilename
             // 
             this.labelFilename.Font = new System.Drawing.Font("Segoe MDL2 Assets", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.labelFilename.Location = new System.Drawing.Point(812, 84);
+            this.labelFilename.Location = new System.Drawing.Point(800, 32);
             this.labelFilename.Name = "labelFilename";
             this.labelFilename.Size = new System.Drawing.Size(317, 23);
             this.labelFilename.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(707, 505);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(448, 380);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "GMAP Controls\r\n\r\nLeft Click map to add marker\r\nRight Click two markers to add edg" +
+    "e\r\nRight Click and drag map to pan\r\nScroll to zoom";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(707, 74);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 12;
+            this.btnClear.Text = "Clear Map";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1211, 749);
+            this.ClientSize = new System.Drawing.Size(1211, 899);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelFilename);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label2);
@@ -190,6 +219,8 @@ namespace Tucil3
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Label labelFilename;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

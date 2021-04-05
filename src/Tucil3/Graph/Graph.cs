@@ -11,12 +11,9 @@ namespace Tucil3.Graph
     {
         public List<Vertex> Vertices;
 
-        //private Dictionary<string, Dictionary<string, double>> adjMatrix;
-
         public Graph()
         {
             Vertices = new List<Vertex>();
-            //adjMatrix = new Dictionary<string, Dictionary<string, double>>();
         }
 
         public Graph(string filename)
@@ -52,12 +49,6 @@ namespace Tucil3.Graph
             }
         }
 
-        public void printVertex()
-        {
-            foreach (Vertex simpul in Vertices)
-                Console.WriteLine(simpul.Name);
-        }
-
         public void AddVertex(string v, double x, double y)
         {
             Vertices.Add(new Vertex(v, x, y));
@@ -68,12 +59,23 @@ namespace Tucil3.Graph
             Vertices.RemoveAll(vertex => vertex.Name == v);
         }
 
-        public void AddEdge(string v1, string v2, double w)
+        public void AddEdge(string v1Name, string v2Name, double w)
         {
-            Edge e1 = new Edge(v2, w);
-            Edge e2 = new Edge(v1, w);
-            Vertices.Find(v => v.Name == v1).Edges.Add(e1);
-            Vertices.Find(v => v.Name == v2).Edges.Add(e2);
+            Edge e1 = new Edge(v2Name, w);
+            Edge e2 = new Edge(v1Name, w);
+            Vertex v1 = Vertices.Find(v => v.Name == v1Name);
+            Vertex v2 = Vertices.Find(v => v.Name == v2Name);
+
+           foreach (Edge e in v1.Edges)
+            {
+                if (e.ToVertex == v2Name)
+                {
+                    return;
+                }
+            }
+
+            v1.Edges.Add(e1);
+            v2.Edges.Add(e2);
         }
 
         public void RemoveEdge(string v1, string v2)
@@ -140,17 +142,17 @@ namespace Tucil3.Graph
                         resultString += " -> ";
                     }
                 }
-            }
-            resultString += "\n";
-            resultString += "Jarak yang ditempuh: ";
-            if (cost[dest] >= 1000)
-            {
-                double km = cost[dest] / 1000;
-                resultString += km.ToString() + " kilometer";
-            }
-            else
-            {
-                resultString += cost[dest].ToString() + " meter";
+                resultString += "\n";
+                resultString += "Jarak yang ditempuh: ";
+                if (cost[dest] >= 1000)
+                {
+                    double km = cost[dest] / 1000;
+                    resultString += km.ToString() + " kilometer";
+                }
+                else
+                {
+                    resultString += cost[dest].ToString() + " meter";
+                }
             }
 
             return new Tuple<List<string>, string>(path, resultString);
