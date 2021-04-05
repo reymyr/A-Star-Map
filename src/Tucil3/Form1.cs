@@ -45,6 +45,19 @@ namespace Tucil3
                 graphVisualizer.Controls.Clear();
                 graphVisualizer.Controls.Add(viewer);
 
+                //set maps di tengah-tengah node
+                double lat = 0;
+                double longi = 0;
+                int counter = 0;
+                foreach (Vertex v in graph.Vertices)
+                {
+                    lat += v.Latitude;
+                    longi += v.Longitude;
+                    counter++;
+                }
+
+                gmap.Position = new GMap.NET.PointLatLng(lat/counter, longi/counter);
+
                 GMap.NET.WindowsForms.GMapOverlay markers = new GMap.NET.WindowsForms.GMapOverlay("markers");
                 gmap.Overlays.Add(markers);
 
