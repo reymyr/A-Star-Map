@@ -9,13 +9,16 @@ namespace Tucil3.Graph
 {
     class Graph
     {
+        // Simpul dalam graph
         public List<Vertex> Vertices;
 
+        // Default constructor
         public Graph()
         {
             Vertices = new List<Vertex>();
         }
 
+        // Constructor menerima nama file
         public Graph(string filename)
         {
             Vertices = new List<Vertex>();
@@ -49,16 +52,13 @@ namespace Tucil3.Graph
             }
         }
 
+        // Menambah simpul
         public void AddVertex(string v, double x, double y)
         {
             Vertices.Add(new Vertex(v, x, y));
         }
 
-        public void RemoveVertex(string v)
-        {
-            Vertices.RemoveAll(vertex => vertex.Name == v);
-        }
-
+        // Menambah sisi (Asumsi nama simpul valid)
         public void AddEdge(string v1Name, string v2Name, double w)
         {
             Edge e1 = new Edge(v2Name, w);
@@ -66,6 +66,7 @@ namespace Tucil3.Graph
             Vertex v1 = Vertices.Find(v => v.Name == v1Name);
             Vertex v2 = Vertices.Find(v => v.Name == v2Name);
 
+           // Jika sisi sudah ada tidak ditambahkan
            foreach (Edge e in v1.Edges)
             {
                 if (e.ToVertex == v2Name)
@@ -78,14 +79,10 @@ namespace Tucil3.Graph
             v2.Edges.Add(e2);
         }
 
-        public void RemoveEdge(string v1, string v2)
-        {
-            Vertices.Find(v => v.Name == v1).Edges.RemoveAll(edge => edge.ToVertex == v2);
-            Vertices.Find(v => v.Name == v2).Edges.RemoveAll(edge => edge.ToVertex == v1);
-        }
-
+        // Fungsi A Star mencari jalan dari simpul source ke simpul dest
         public Tuple<List<string>, string> AStar(string source, string dest)
         {
+            // Inisiasi
             Dictionary<string, double> cost = new Dictionary<string, double>();
             Dictionary<string, string> prev = new Dictionary<string, string>();
             List<Tuple<string, double>> pq = new List<Tuple<string, double>>();
@@ -95,39 +92,61 @@ namespace Tucil3.Graph
                 prev[v.Name] = null;
             }
 
+            // Cost node asal = 0
             cost[source] = 0;
+
+            // Tambah node asal ke dalam list simpul yang akan diekspan
             pq.Add(new Tuple<string, double>(source, 0));
 
+            // Selama masih ada simpul yang dapat diekspan
             while (pq.Count > 0)
             {
+                // Ambil simpul yang memiliki estimasi cost terendah
                 double min = pq.Min(i => i.Item2);
                 Tuple<string, double> current = pq.FirstOrDefault(i => i.Item2 == min);
+
+                // Keluarkan simpul terendah
                 pq.Remove(current);
 
                 Vertex curVertex = Vertices.Find(v => v.Name == current.Item1);
 
+                // Jika simpul saat ini sudah sama dengan tujuan, pencarian selesai
                 if (curVertex.Name == dest)
                 {
                     break;
                 }
 
+                // Untuk setiap sisi pada simpul saat ini
                 foreach (Edge e in curVertex.Edges)
                 {
+                    // Hitung cost baru untuk simpul tujuan sisi
                     double newCost = cost[curVertex.Name] + e.Weight;
+
+                    // Jika simpul belum ada pada dictionary cost atau cost baru lebih kecil dari yang lama
                     if (!cost.ContainsKey(e.ToVertex) || newCost < cost[e.ToVertex])
                     {
+                        // Update cost simpul
                         cost[e.ToVertex] = newCost;
+
+                        // Hitung estimasi cost menuju goal
                         double estCost = newCost + CalcHeuristic(e.ToVertex, dest);
+
+                        // Tambahkan dalam list simpul ekspan
                         pq.Add(new Tuple<string, double>(e.ToVertex, estCost));
+
+                        // Update nilai prev untuk simpul
                         prev[e.ToVertex] = curVertex.Name;
                     }
                 }
             }
 
+            // Ambil jalur yang ditemukan
             List<string> path = GetPath(source, dest, prev);
 
+            // String yang akan ditampilkan pada GUI
             string resultString = "";
 
+            // Jika tidak ada jalur
             if (path == null)
             {
                 resultString += "Tidak ada jalur";
@@ -158,6 +177,7 @@ namespace Tucil3.Graph
             return new Tuple<List<string>, string>(path, resultString);
         }
 
+        // Fungsi untuk menghasilkan jalur dari source ke dest sesuai dengan prev
         public List<string> GetPath(string source, string dest, Dictionary<string, string> prev)
         {
             List<string> path = new List<string>();
@@ -180,10 +200,12 @@ namespace Tucil3.Graph
             }
         }
 
+        // Fungsi mengubah derajat ke radian
         public double degreeToRadian (double degree) {
             return degree*Math.PI/180;
         }
 
+        // Fungsi haversine untuk menghitung jarak antara dua koordinat
         public double haversine(double curLintang, double goalLintang, double curBujur, double goalBujur)
         { //semua parameter belum diubah ke radian
             curBujur = degreeToRadian(curBujur);
@@ -198,6 +220,7 @@ namespace Tucil3.Graph
             return distancePerKilometer * 6378137; //6378137 itu jari jari bumi (satuan meter)
         }
 
+        // Fungsi heuristic dua simpul
         private double CalcHeuristic(string v1, string goal)
         {
             Vertex curVertex = Vertices.Find(v => v.Name == v1);
