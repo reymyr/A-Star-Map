@@ -111,6 +111,7 @@ namespace Tucil3
         {
             if (startComboBox.Text != "" && goalComboBox.Text != "")
             {
+                gmap.Overlays[1].Clear();
                 Tuple<List<string>, string> result = graph.AStar(startComboBox.Text, goalComboBox.Text);
 
                 // Isi result dengan hasil explore
