@@ -4,7 +4,7 @@ Implementasi Algoritma A* untuk Menentukan Lintasan Terpendek
 
 Program ini dibuat untuk memenuhi salah satu tugas kecil mata kuliah IF2211 Strategi Algoritma. Program ini adalah program untuk menemukan jalur terpendek antara dua titik lokasi peta dengan menggunakan Algoritma A*. Program ini dapat mengambil input graf dengan file eksternal maupun langsung dari peta.
 
-##Table of Contents
+## Table of Contents
 * [Requirements](#requirements)
 * [Cara Menggunakan Program](#cara-menggunakan-program)
 * [Status](#status)
