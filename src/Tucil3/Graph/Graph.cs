@@ -23,18 +23,24 @@ namespace Tucil3.Graph
         {
             Vertices = new List<Vertex>();
             string[] filePerLine = File.ReadAllLines(filename); //baca file per line
-                                                                //hitung jumlah vertex
+            //hitung jumlah vertex
             int nVertex = int.Parse(filePerLine[0]);
             //container isi file per line
             string[] pairVertex;
             string[] pairEdge;
-            Dictionary<int, string> kamusVertex = new Dictionary<int, string>(); //buat nyari nama vertex pas masukin edge adj matrix
+            //buat nyari nama vertex pas masukin edge adj matrix
+            Dictionary<int, string> kamusVertex = new Dictionary<int, string>();
 
             int i = 1;
             for (; i <= nVertex; i++)
             {
                 pairVertex = filePerLine[i].Split(' '); //baca vertex
-                this.AddVertex(pairVertex[2], double.Parse(pairVertex[0], CultureInfo.InvariantCulture), double.Parse(pairVertex[1], CultureInfo.InvariantCulture)); //karena urutan di file : lintang bujur nama
+
+                //karena urutan di file : lintang bujur nama
+                this.AddVertex(
+                    pairVertex[2], 
+                    double.Parse(pairVertex[0], CultureInfo.InvariantCulture), 
+                    double.Parse(pairVertex[1], CultureInfo.InvariantCulture)); 
                 kamusVertex.Add(i - 1, pairVertex[2]); //nambahin nama vertex ke kamus
             }
 
@@ -45,10 +51,14 @@ namespace Tucil3.Graph
                 {
                     if (double.Parse(pairEdge[k]) > 0)
                     {
-                        this.AddEdge(kamusVertex[j-i], kamusVertex[k], double.Parse(pairEdge[k], CultureInfo.InvariantCulture)); //intinya ini masukin edge berasal dari kamus nama    
+                        //intinya ini masukin edge berasal dari kamus nama
+                        this.AddEdge(
+                            kamusVertex[j-i], 
+                            kamusVertex[k], 
+                            double.Parse(pairEdge[k], 
+                            CultureInfo.InvariantCulture));     
                     }
                 }
-
             }
         }
 
@@ -122,7 +132,8 @@ namespace Tucil3.Graph
                     // Hitung cost baru untuk simpul tujuan sisi
                     double newCost = cost[curVertex.Name] + e.Weight;
 
-                    // Jika simpul belum ada pada dictionary cost atau cost baru lebih kecil dari yang lama
+                    // Jika simpul belum ada pada dictionary cost
+                    // atau cost baru lebih kecil dari yang lama
                     if (!cost.ContainsKey(e.ToVertex) || newCost < cost[e.ToVertex])
                     {
                         // Update cost simpul
@@ -206,7 +217,11 @@ namespace Tucil3.Graph
         }
 
         // Fungsi haversine untuk menghitung jarak antara dua koordinat
-        public double haversine(double curLintang, double goalLintang, double curBujur, double goalBujur)
+        public double haversine(
+            double curLintang,
+            double goalLintang, 
+            double curBujur, 
+            double goalBujur)
         { //semua parameter belum diubah ke radian
             curBujur = degreeToRadian(curBujur);
             goalBujur = degreeToRadian(goalBujur);
@@ -215,7 +230,14 @@ namespace Tucil3.Graph
 
             double diffBujur = goalBujur - curBujur;
             double diffLintang = goalLintang - curLintang;
-            double haversineFormula = Math.Pow(Math.Sin(diffLintang/2),2) + Math.Cos(curLintang) * Math.Cos(goalLintang) * Math.Pow(Math.Sin(diffBujur/2),2);
+            double haversineFormula = 
+                Math.Pow(
+                    Math.Sin(
+                        diffLintang/2),2) + 
+                        Math.Cos(curLintang) * 
+                        Math.Cos(goalLintang) *
+                        Math.Pow(Math.Sin(diffBujur/2),
+                    2);
             double distancePerKilometer = 2 * Math.Asin(Math.Sqrt(haversineFormula));
             return distancePerKilometer * 6378137; //6378137 itu jari jari bumi (satuan meter)
         }
@@ -226,7 +248,11 @@ namespace Tucil3.Graph
             Vertex curVertex = Vertices.Find(v => v.Name == v1);
             Vertex goalVertex = Vertices.Find(v => v.Name == goal);
 
-            return haversine(curVertex.Latitude, goalVertex.Latitude, curVertex.Longitude, goalVertex.Longitude);
+            return haversine(
+                curVertex.Latitude, 
+                goalVertex.Latitude, 
+                curVertex.Longitude, 
+                goalVertex.Longitude);
         }
 
         // Mengembalikan graf dalam bentuk graph MSAGL untuk divisualisasikan
@@ -234,7 +260,8 @@ namespace Tucil3.Graph
         {
             Microsoft.Msagl.Drawing.Graph g = new Microsoft.Msagl.Drawing.Graph(name);
             g.Directed = false;
-            Vertices.ForEach(v => g.AddNode(v.Name).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle);
+            Vertices.ForEach(
+                v => g.AddNode(v.Name).Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle);
 
             foreach (Vertex v in Vertices)
             {
@@ -243,7 +270,8 @@ namespace Tucil3.Graph
                     int a = v.Name.CompareTo(e.ToVertex);
                     if (v.Name.CompareTo(e.ToVertex) < 0)
                     {
-                        Microsoft.Msagl.Drawing.Edge edge = g.AddEdge(v.Name, e.Weight.ToString(), e.ToVertex);
+                        Microsoft.Msagl.Drawing.Edge edge = 
+                            g.AddEdge(v.Name, e.Weight.ToString(), e.ToVertex);
                         edge.Attr.ArrowheadAtTarget = Microsoft.Msagl.Drawing.ArrowStyle.None;
                         edge.Attr.Id = v.Name + e.ToVertex;
                     }

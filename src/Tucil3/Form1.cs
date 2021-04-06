@@ -78,7 +78,9 @@ namespace Tucil3
                         {
                             points.Clear();
                             points.Add(curPoint);
-                            points.Add(new GMap.NET.PointLatLng(graph.Vertices.Find(v => v.Name == edge.ToVertex).Latitude, graph.Vertices.Find(v => v.Name == edge.ToVertex).Longitude));
+                            points.Add(new GMap.NET.PointLatLng(
+                                graph.Vertices.Find(v => v.Name == edge.ToVertex).Latitude,
+                                graph.Vertices.Find(v => v.Name == edge.ToVertex).Longitude));
                             GMapPolygon line = new GMapPolygon(points, v.Name + edge.ToVertex);
                             line.Stroke = new Pen(Color.Blue, 1);
                             gmap.Overlays[0].Polygons.Add(line);
@@ -138,8 +140,12 @@ namespace Tucil3
                         msaglgraph.EdgeById(first + second).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
 
                         points.Clear();
-                        points.Add(new GMap.NET.PointLatLng(graph.Vertices.Find(v => v.Name == first).Latitude, graph.Vertices.Find(v => v.Name == first).Longitude));
-                        points.Add(new GMap.NET.PointLatLng(graph.Vertices.Find(v => v.Name == second).Latitude, graph.Vertices.Find(v => v.Name == second).Longitude));
+                        points.Add(new GMap.NET.PointLatLng(
+                            graph.Vertices.Find(v => v.Name == first).Latitude,
+                            graph.Vertices.Find(v => v.Name == first).Longitude));
+                        points.Add(new GMap.NET.PointLatLng(
+                            graph.Vertices.Find(v => v.Name == second).Latitude,
+                            graph.Vertices.Find(v => v.Name == second).Longitude));
                         GMapPolygon line = new GMapPolygon(points, "route" + i.ToString());
                         line.Stroke = new Pen(Color.Orange, 4);
                         gmap.Overlays[1].Polygons.Add(line);
@@ -215,7 +221,11 @@ namespace Tucil3
                     line.Stroke = new Pen(Color.Blue, 1);
                     gmap.Overlays[0].Polygons.Add(line);
 
-                    double distance = Math.Round(graph.haversine(addEdgeMarkers[0].Position.Lat, item.Position.Lat, addEdgeMarkers[0].Position.Lng, item.Position.Lng), 2);
+                    double distance = Math.Round(graph.haversine(
+                        addEdgeMarkers[0].Position.Lat,
+                        item.Position.Lat,
+                        addEdgeMarkers[0].Position.Lng,
+                        item.Position.Lng), 2);
                     graph.AddEdge(addEdgeMarkers[0].ToolTipText, item.ToolTipText, distance);
 
                     // Membuat MSAGL viewer
