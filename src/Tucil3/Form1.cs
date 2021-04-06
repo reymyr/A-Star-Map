@@ -244,6 +244,8 @@ namespace Tucil3
             labelFilename.Text = "";
             graph = new Graph.Graph();
             graphVisualizer.Controls.Clear();
+            startComboBox.Items.Clear();
+            goalComboBox.Items.Clear();
         }
     }
 }

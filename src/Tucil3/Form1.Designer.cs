@@ -46,7 +46,8 @@ namespace Tucil3
             // 
             // resultBox
             // 
-            this.resultBox.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.resultBox.BackColor = System.Drawing.SystemColors.Control;
+            this.resultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.resultBox.Location = new System.Drawing.Point(708, 195);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
@@ -162,7 +163,7 @@ namespace Tucil3
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(707, 505);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(448, 380);
@@ -184,8 +185,8 @@ namespace Tucil3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1211, 899);
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.ClientSize = new System.Drawing.Size(1211, 749);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelFilename);
