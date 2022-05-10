@@ -1,4 +1,4 @@
-# Tugas Kecil 3 Strategi Algoritma
+# A* Shortest Path of Maps Location
 Tugas Kecil 3 IF2211 Strategi Algoritma
 Implementasi Algoritma A* untuk Menentukan Lintasan Terpendek
 
